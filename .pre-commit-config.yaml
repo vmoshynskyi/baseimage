@@ -1,5 +1,4 @@
 repos:
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
@@ -13,3 +12,6 @@ repos:
     rev: v2.10.0
     hooks:
       - id: hadolint
+        args: [
+          '--ignore=DL3018',
+        ]
