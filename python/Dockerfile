@@ -9,7 +9,7 @@ RUN addgroup --system --gid 1001 app \
 
 ENV PYTHONDONTWRITEBYTECODE=true \
     PYTHONIOENCODING=UTF-8 \
-    POETRY_VERSION=1.3.1 \
+    POETRY_VERSION=1.8.5 \
     POETRY_HOME="/opt/poetry" \
     POETRY_VIRTUALENVS_CREATE=false
 
