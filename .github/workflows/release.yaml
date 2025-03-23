@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'python-*'
+
+jobs:
+  Release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set environment variables
+        run: |
+          echo "IMAGE_NAME=ghcr.io/$GITHUB_REPOSITORY" >> $GITHUB_ENV
+          echo "IMAGE_HASH=${GITHUB_SHA:0:8}" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$GITHUB_REF_NAME" >> $GITHUB_ENV
+
+      - name: Release image
+        run: |
+          docker buildx imagetools create \
+            --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ${{ env.IMAGE_NAME }}:${{ env.IMAGE_HASH }}
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          body: Release of `${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}`
+          make_latest: false
