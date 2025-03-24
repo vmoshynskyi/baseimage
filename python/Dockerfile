@@ -9,20 +9,19 @@ RUN addgroup --system --gid 1001 app \
 
 ENV PYTHONDONTWRITEBYTECODE=true \
     PYTHONIOENCODING=UTF-8 \
-    POETRY_VERSION=2.1.1 \
-    POETRY_HOME="/opt/poetry" \
-    POETRY_VIRTUALENVS_CREATE=false
+    UV_VERSION=0.6.9 \
+    UV_INSTALL_DIR="/opt/uv" \
+    UV_PROJECT_ENVIRONMENT="/usr/local/"
 
-ENV PATH="${POETRY_HOME}/bin:${PATH}"
+ENV PATH="${UV_INSTALL_DIR}:${PATH}"
 
 RUN apk --no-cache add \
     git \
-    bash \
     curl \
     gcc \
     libc-dev \
     libffi-dev
 
-RUN curl -sSL https://install.python-poetry.org | python3 -
+RUN curl -sSL "https://astral.sh/uv/${UV_VERSION}/install.sh" | sh
 
-RUN poetry --version
+RUN uv --version
