@@ -1,8 +1,8 @@
-FROM python:3.12.9-alpine3.21
+FROM python:3.12.11-slim-trixie
 
 LABEL maintainer="Vadym Moshynskyi <v@moshynskyi.com>"
 
-SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN addgroup --system --gid 1001 app \
     && adduser --system --disabled-password --home /app --uid 1001 --ingroup app app
@@ -15,13 +15,14 @@ ENV PYTHONDONTWRITEBYTECODE=true \
 
 ENV PATH="${POETRY_HOME}/bin:${PATH}"
 
-RUN apk --no-cache add \
-    git \
-    bash \
-    curl \
-    gcc \
-    libc-dev \
-    libffi-dev
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        git \
+        curl \
+        gcc \
+        libc-dev \
+        libffi-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 

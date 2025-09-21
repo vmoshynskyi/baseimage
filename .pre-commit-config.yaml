@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-merge-conflict
@@ -9,9 +9,9 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/AleksaC/hadolint-py
-    rev: v2.12.1b3
+    rev: v2.13.1
     hooks:
       - id: hadolint
         args: [
-          '--ignore=DL3018',
+          "--ignore=DL3008",
         ]
