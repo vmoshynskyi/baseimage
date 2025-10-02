@@ -9,7 +9,7 @@ RUN addgroup --system --gid 1001 app \
 
 ENV PYTHONDONTWRITEBYTECODE=true \
     PYTHONIOENCODING=UTF-8 \
-    UV_VERSION=0.6.9 \
+    UV_VERSION=0.8.22 \
     UV_INSTALL_DIR="/opt/uv" \
     UV_PROJECT_ENVIRONMENT="/usr/local/"
 
