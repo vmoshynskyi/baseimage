@@ -1,4 +1,4 @@
-FROM python:3.13.2-alpine3.21
+FROM python:3.13.7-alpine3.21
 
 LABEL maintainer="Vadym Moshynskyi <v@moshynskyi.com>"
 
