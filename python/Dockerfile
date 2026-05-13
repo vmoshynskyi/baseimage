@@ -1,4 +1,4 @@
-FROM python:3.14.4-slim-trixie
+FROM python:3.14.5-slim-trixie
 
 LABEL maintainer="Vadym Moshynskyi <v@moshynskyi.com>"
 
